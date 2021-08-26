@@ -10,8 +10,10 @@ class Game {
     this.board=[];
     this.currPlayer=1;
     this.makeBoard();
-    this.makeHtmlBoard();
     this.boundHandleClick = this.handleClick.bind(this);
+    this.makeHtmlBoard();
+
+    console.log("constuctor this.boutnHandleClick ", this.boundHandleClick);
   }
 
   /** makeBoard: create in-JS board structure:
@@ -25,6 +27,8 @@ class Game {
   
   /** makeHtmlBoard: make HTML table and row of column tops. */
   
+
+
   makeHtmlBoard() {
     const board = document.getElementById('board');
   
@@ -33,6 +37,8 @@ class Game {
     top.setAttribute('id', 'column-top');
     top.addEventListener('click', this.boundHandleClick); //COME BACK FOR HANDLECLICK BIND
   
+    console.log("makeHTMLBoard this.boundHandleClick ", this.boundHandleClick);
+
     for (let x = 0; x < this.width; x++) {
       const headCell = document.createElement('td');
       headCell.setAttribute('id', x);
@@ -86,6 +92,7 @@ class Game {
   /** handleClick: handle click of column top to play piece */
   
   handleClick(evt) {
+    console.log("handleClick ran")
     // get x from ID of clicked cell
     const x = +evt.target.id;
   
@@ -115,7 +122,7 @@ class Game {
   /** checkForWin: check board cell-by-cell for "does a win start here?" */
   
   checkForWin() {
-    function _win(cells) {
+    let _win = ((cells) => {
       // Check four cells to see if they're all color of current player
       //  - cells: list of four (y, x) cells
       //  - returns true if all are legal coordinates & all match this.currPlayer
@@ -128,7 +135,7 @@ class Game {
           x < this.width &&
           this.board[y][x] === this.currPlayer
       );
-    }
+    });
   
     for (let y = 0; y < this.height; y++) {
       for (let x = 0; x < this.width; x++) {
