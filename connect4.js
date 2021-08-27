@@ -158,7 +158,21 @@ startButton.setAttribute("id", "start");
 document.body.prepend(startButton);
 startButton.addEventListener("click", startGame);
 
+const playerForm = document.createElement("form");
+
+
 /** Create instance of game */
 function startGame() {
   new Game();
+  new Player(colorOne);
+  new Player(colorTwo);
 }
+
+/** Class that stores player color on their instance */
+class Player {
+  constructor(color) {
+    this.color = color;
+  }
+}
+
+
