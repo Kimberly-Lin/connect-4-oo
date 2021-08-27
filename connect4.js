@@ -81,6 +81,9 @@ class Game {
 
   endGame(msg) {
     alert(msg);
+    const top = document.getElementById("column-top")
+    console.log(top);
+    top.removeEventListener("click", this.handleClick);
   }
 
   /** handleClick: handle click of column top to play piece */
@@ -149,4 +152,13 @@ class Game {
   }
 }
 
-new Game(6, 7);
+const startButton= document.createElement("button");
+startButton.innerText="Start the game!";
+startButton.setAttribute("id", "start");
+document.body.prepend(startButton);
+startButton.addEventListener("click", startGame);
+
+/** Create instance of game */
+function startGame() {
+  new Game();
+}
